@@ -13,13 +13,17 @@ class App extends React.Component {
     photos: [],
     elephants: [],
     lions: [],
-    leopards: []
+    leopards: [],
+    buffalo: [],
+    rhinocerous: []
   }
 
   componentDidMount() {
     this.performSearch('elephants')
     this.performSearch('lions')
     this.performSearch('leopards')
+    this.performSearch('buffalo')
+    this.performSearch('rhinocerous')
   }
 
   performSearch = (query) => {
@@ -31,6 +35,10 @@ class App extends React.Component {
           this.setState( { lions: response.data.photos.photo } )
         } else if (query === 'leopards') {
           this.setState( { leopards: response.data.photos.photo } )
+        } else if (query === 'buffalo') {
+          this.setState( { buffalo: response.data.photos.photo } )
+        } else if (query === 'rhinocerous') {
+          this.setState( { rhinocerous: response.data.photos.photo } )
         } else {
           this.setState( { photos: response.data.photos.photo } )
         }
@@ -48,10 +56,12 @@ class App extends React.Component {
             <SearchBar performSearch={this.performSearch} />
             <Nav />
             <Switch>
-              <Route exact path='/' render={() => <Gallery data={this.state.photos} /> } />
+              <Route exact path="/" render={ () => <Redirect to="/elephant" />} />
               <Route path='/elephant' render={() => <Gallery data={this.state.elephants} /> } />
               <Route path='/lion' render={() => <Gallery data={this.state.lions} /> } />
               <Route path='/leopard' render={() => <Gallery data={this.state.leopards} /> } />
+              <Route path='/buffalo' render={() => <Gallery data={this.state.buffalo} /> } />
+              <Route path='/rhinocerous' render={() => <Gallery data={this.state.rhinocerous} /> } />
               <Route path='/search/:text' render={( {match} ) => <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
               <Route component={NotFound} />
             </Switch>
