@@ -1,11 +1,20 @@
 import React from 'react';
+import SearchBar from './SearchBar'
+import Nav from './Nav'
+import Gallery from './Gallery'
 
-function App() {
-  return (
-    <div id="root">
-      
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div id="root">
+        <div className="container">
+          <SearchBar />
+          <Nav />
+          <Gallery />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
