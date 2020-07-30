@@ -11,7 +11,7 @@ class Gallery extends React.Component {
 
     return (
       <div className="photo-container">
-        <h2>Results</h2>
+        <h2>Results: {this.props.query} </h2>
         <ul>
           { photos }
         </ul>
