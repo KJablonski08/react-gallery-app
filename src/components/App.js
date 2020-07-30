@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import NotFound from './NotFound';
 
+
 class App extends React.Component {
 
   state = {
@@ -15,7 +16,9 @@ class App extends React.Component {
     lions: [],
     leopards: [],
     buffalo: [],
-    rhinocerous: []
+    rhinocerous: [],
+    // displays a loading indicator each time the app fetches new data
+    loading: true,
   }
 
   //upon app component mounted - run performSearch function to get data from api and save in state for nav buttons 
@@ -34,17 +37,17 @@ class App extends React.Component {
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=16&format=json&nojsoncallback=1`)
       .then(response => {
         if (query === 'elephants') {
-          this.setState( { elephants: response.data.photos.photo } )
+          this.setState( { elephants: response.data.photos.photo, loading: false } )
         } else if (query === 'lions') {
-          this.setState( { lions: response.data.photos.photo } )
+          this.setState( { lions: response.data.photos.photo, loading: false} )
         } else if (query === 'leopards') {
-          this.setState( { leopards: response.data.photos.photo } )
+          this.setState( { leopards: response.data.photos.photo, loading: false  } )
         } else if (query === 'buffalo') {
-          this.setState( { buffalo: response.data.photos.photo } )
+          this.setState( { buffalo: response.data.photos.photo, loading: false } )
         } else if (query === 'rhinocerous') {
-          this.setState( { rhinocerous: response.data.photos.photo } )
+          this.setState( { rhinocerous: response.data.photos.photo, loading: false  })
         } else {
-          this.setState( { photos: response.data.photos.photo } )
+          this.setState( { photos: response.data.photos.photo, loading: false } )
         }
       })
       .catch(error => {
@@ -61,14 +64,13 @@ class App extends React.Component {
             <Nav />
             <Switch>
               <Route exact path="/" render={ () => <Redirect to="/elephant" />} />
-              <Route path='/elephant' render={( {match} ) => <Gallery data={this.state.elephants} query={match.path.slice(1)} /> } />
-              <Route path='/lion' render={({match}) => <Gallery data={this.state.lions} query={match.path.slice(1)} /> } />
-              <Route path='/leopard' render={({match}) => <Gallery data={this.state.leopards} query={match.path.slice(1)} /> } />
-              <Route path='/buffalo' render={({match}) => <Gallery data={this.state.buffalo} query={match.path.slice(1)} /> } />
-              <Route path='/rhinocerous' render={({match}) => <Gallery data={this.state.rhinocerous} query={match.path.slice(1)} /> } />
+              <Route path='/elephant' render={( {match} ) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.elephants} query={match.path.slice(1)} /> } />
+              <Route path='/lion' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.lions} query={match.path.slice(1)} /> } />
+              <Route path='/leopard' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.leopards} query={match.path.slice(1)} /> } />
+              <Route path='/buffalo' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.buffalo} query={match.path.slice(1)} /> } />
+              <Route path='/rhinocerous' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.rhinocerous} query={match.path.slice(1)} /> } />
 
-
-              <Route path='/search/:text' render={( {match} ) => <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
+              <Route path='/search/:text' render={( {match} ) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
 
               {/* 404-like error route that displays when a URL path does not match an existing route. */}
               <Route component={NotFound} />
