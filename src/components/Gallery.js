@@ -3,11 +3,17 @@ import Photo from './Photo';
 
 class Gallery extends React.Component {
   render() {
+
+    const results = this.props.data
+    let photos = results.map( pic => 
+      <Photo url={ `https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_n.jpg` } />
+    )
+
     return (
       <div class="photo-container">
         <h2>Results</h2>
         <ul>
-          <Photo />
+          { photos }
         </ul>
       </div> 
     );

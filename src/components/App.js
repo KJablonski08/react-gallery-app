@@ -23,7 +23,7 @@ class App extends React.Component {
       })
       .catch(error => {
         console.log('Error fetching data from Flickr API', error);
-      });
+    });
   }
 
   render() {
@@ -34,7 +34,7 @@ class App extends React.Component {
             <SearchBar />
             <Nav />
             <Switch>
-              <Gallery />
+              <Gallery data={this.state.photos} />
             </Switch>
           </div>
         </BrowserRouter>
