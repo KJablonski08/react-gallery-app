@@ -1,5 +1,6 @@
 import React from 'react';
 
+// will render if route is not found 
 const NotFound = () => {
   return (
     <li className="not-found">

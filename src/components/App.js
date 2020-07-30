@@ -18,6 +18,7 @@ class App extends React.Component {
     rhinocerous: []
   }
 
+  //upon app component mounted - run performSearch function to get data from api and save in state for nav buttons 
   componentDidMount() {
     this.performSearch('elephants')
     this.performSearch('lions')
@@ -26,6 +27,9 @@ class App extends React.Component {
     this.performSearch('rhinocerous')
   }
 
+
+  // Using Flickr API : API Keys and proper Photo source URLs. 
+  //Data is passed down and rendered in Gallery component 
   performSearch = (query) => {
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=16&format=json&nojsoncallback=1`)
       .then(response => {
@@ -62,8 +66,10 @@ class App extends React.Component {
               <Route path='/leopard' render={({match}) => <Gallery data={this.state.leopards} query={match.path.slice(1)} /> } />
               <Route path='/buffalo' render={({match}) => <Gallery data={this.state.buffalo} query={match.path.slice(1)} /> } />
               <Route path='/rhinocerous' render={({match}) => <Gallery data={this.state.rhinocerous} query={match.path.slice(1)} /> } />
+
+
               <Route path='/search/:text' render={( {match} ) => <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
-              
+
               {/* 404-like error route that displays when a URL path does not match an existing route. */}
               <Route component={NotFound} />
             </Switch>
