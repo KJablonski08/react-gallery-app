@@ -45,7 +45,7 @@ class App extends React.Component {
       <div id="root">
         <BrowserRouter>
           <div className="container">
-            <SearchBar onSearch={this.performSearch} />
+            <SearchBar performSearch={this.performSearch} />
             <Nav />
             <Switch>
               <Route exact path='/' render={() => <Gallery data={this.state.photos} /> } />
