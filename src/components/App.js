@@ -8,10 +8,10 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 class App extends React.Component {
 
   state = {
-    photos = [],
-    elephants =[],
-    lions = [],
-    leopards = []
+    photos: [],
+    elephants: [],
+    lions: [],
+    leopards: []
   }
 
   render() {
@@ -25,8 +25,8 @@ class App extends React.Component {
               <Gallery />
             </Switch>
           </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </div>
     );
   }
 }
