@@ -63,13 +63,13 @@ class App extends React.Component {
             <SearchBar performSearch={this.performSearch} />
             <Nav />
             <Switch>
-              <Route exact path="/" render={ () => <Redirect to="/elephant" />} />
+              <Route exact path="/" render={ () => <Redirect to="/rhinocerous" />} />
               <Route path='/elephant' render={( {match} ) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.elephants} query={match.path.slice(1)} /> } />
               <Route path='/lion' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.lions} query={match.path.slice(1)} /> } />
               <Route path='/leopard' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.leopards} query={match.path.slice(1)} /> } />
               <Route path='/buffalo' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.buffalo} query={match.path.slice(1)} /> } />
               <Route path='/rhinocerous' render={({match}) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.rhinocerous} query={match.path.slice(1)} /> } />
-
+              {/* displays a loading indicator each time the app fetches new data */}
               <Route path='/search/:text' render={( {match} ) => (this.state.loading) ?  <p>Loading</p> : <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
 
               {/* 404-like error route that displays when a URL path does not match an existing route. */}
