@@ -52,6 +52,7 @@ class App extends React.Component {
               <Route path='/elephant' render={() => <Gallery data={this.state.elephants} /> } />
               <Route path='/lion' render={() => <Gallery data={this.state.lions} /> } />
               <Route path='/leopard' render={() => <Gallery data={this.state.leopards} /> } />
+              <Route path='/search/:text' render={( {match} ) => <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
               <Route component={NotFound} />
             </Switch>
           </div>
