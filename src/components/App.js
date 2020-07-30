@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   performSearch = (query) => {
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=16&format=json&nojsoncallback=1`)
       .then(response => {
         if (query === 'elephants') {
           this.setState( { elephants: response.data.photos.photo } )
@@ -63,6 +63,8 @@ class App extends React.Component {
               <Route path='/buffalo' render={({match}) => <Gallery data={this.state.buffalo} query={match.path.slice(1)} /> } />
               <Route path='/rhinocerous' render={({match}) => <Gallery data={this.state.rhinocerous} query={match.path.slice(1)} /> } />
               <Route path='/search/:text' render={( {match} ) => <Gallery data={this.state.photos} performSearch={this.performSearch} query={match.params.text} />} />
+              
+              {/* 404-like error route that displays when a URL path does not match an existing route. */}
               <Route component={NotFound} />
             </Switch>
           </div>

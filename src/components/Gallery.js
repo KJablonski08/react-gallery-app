@@ -13,7 +13,7 @@ class Gallery extends React.Component {
       <div className="photo-container">
         <h2>Results: {this.props.query} </h2>
         <ul>
-          { photos }
+          { photos.length < 1 ? <h4>No matches found. Please try another search</h4> : photos }
         </ul>
       </div> 
     );
